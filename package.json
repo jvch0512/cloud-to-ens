@@ -1,0 +1,17 @@
+{
+  "name": "cloud-to-ens",
+  "version": "1.0.0",
+  "description": "Cloud configuration snapshot to ENS and NIS2 findings, with remediation, in Spanish and English",
+  "license": "MIT",
+  "type": "module",
+  "bin": { "cloud-to-ens": "dist/src/cli.js" },
+  "scripts": {
+    "build": "tsc",
+    "start": "tsc && node dist/src/server-main.js",
+    "test": "tsc && node --test dist/test/*.test.js"
+  },
+  "repository": "github:jvch0512/cloud-to-ens",
+  "keywords": ["ens", "nis2", "cloud", "aws", "compliance", "spain", "typescript"],
+  "devDependencies": { "@types/node": "^22.0.0", "typescript": "^5.6.0" },
+  "engines": { "node": ">=20" }
+}

@@ -1,0 +1,30 @@
+{
+  "provider": "aws",
+  "account": "123456789012 (prod)",
+  "storage": [
+    { "name": "public-assets", "region": "eu-south-2", "publicAccess": true, "encrypted": true, "versioning": false, "accessLogging": false },
+    { "name": "customer-exports", "region": "us-east-1", "publicAccess": false, "encrypted": false, "versioning": true, "accessLogging": true },
+    { "name": "audit-archive", "region": "eu-south-2", "publicAccess": false, "encrypted": true, "versioning": true, "accessLogging": true }
+  ],
+  "network": [
+    { "name": "sg-bastion", "region": "eu-south-2", "rules": [{ "port": 22, "protocol": "tcp", "source": "0.0.0.0/0" }, { "port": 443, "protocol": "tcp", "source": "0.0.0.0/0" }] },
+    { "name": "sg-db", "region": "eu-south-2", "rules": [{ "port": 5432, "protocol": "tcp", "source": "0.0.0.0/0" }, { "port": 5432, "protocol": "tcp", "source": "10.0.0.0/16" }] },
+    { "name": "sg-legacy", "region": "eu-south-2", "rules": [{ "port": "all", "source": "0.0.0.0/0" }] }
+  ],
+  "databases": [
+    { "name": "orders-db", "region": "eu-south-2", "publiclyAccessible": true, "encrypted": false, "backupRetentionDays": 1, "multiAz": false },
+    { "name": "ledger-db", "region": "eu-south-2", "publiclyAccessible": false, "encrypted": true, "backupRetentionDays": 14, "multiAz": true }
+  ],
+  "identity": {
+    "rootMfa": false,
+    "passwordMinLength": 8,
+    "users": [
+      { "name": "alice", "console": true, "mfa": true, "keyAgeDays": 30, "lastUsedDays": 2 },
+      { "name": "bob", "console": true, "mfa": false, "keyAgeDays": 410, "lastUsedDays": 3 },
+      { "name": "ci-deploy", "console": false, "mfa": false, "keyAgeDays": 220, "lastUsedDays": 1 },
+      { "name": "old-contractor", "console": true, "mfa": false, "keyAgeDays": null, "lastUsedDays": 200 }
+    ]
+  },
+  "logging": { "auditTrail": true, "allRegions": false, "retentionDays": 90, "logValidation": false, "flowLogs": false },
+  "keys": [{ "name": "kms-data", "rotation": false }, { "name": "kms-logs", "rotation": true }]
+}

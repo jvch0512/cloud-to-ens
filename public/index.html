@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'none'">
+<title>cloud-to-ens</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div>
+    <h1>cloud-to-ens</h1>
+    <p class="sub">Paste a cloud configuration snapshot (JSON) or an AWS IAM credential report (CSV). Get findings mapped to ENS measures and NIS2 Art. 21(2), with remediation in English or Spanish. Runs in this tab, nothing is uploaded and no cloud API is called.</p>
+  </div>
+  <div class="row"><button type="button" data-sample="snapshot.json">Snapshot sample</button><button type="button" data-sample="credential-report.csv">IAM report sample</button>
+  <select id="lang" aria-label="Language"><option value="en">English</option><option value="es">Español</option></select></div>
+</header>
+<main>
+  <div class="panel">
+    <h2>Input</h2>
+    <textarea id="input" rows="20" spellcheck="false" placeholder="Paste JSON snapshot or IAM credential report CSV"></textarea>
+    <p class="hint">The format is detected automatically. The mapping to ENS (RD 311/2022, Annex II) is indicative: confirm applicability for your system category and level.</p>
+  </div>
+  <div id="out"></div>
+</main>
+<script type="module" src="app.js"></script>
+</body>
+</html>
